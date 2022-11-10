@@ -1,31 +1,55 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import axios from "axios";
+
+import AppHeader from './components/AppHeader.vue';
+import AppGrid from './components/AppGrid.vue';
+import AppLoader from './components/AppLoader.vue';
+
+
+
+import { store } from "./store";
+
+
+
+export default {
+  components: {
+      AppHeader,
+      AppGrid,
+      AppLoader
+
+  },
+  data() {
+    return {
+      store
+    }
+  },
+  created() {
+
+    this.store.loading = true;
+    axios.get("https://www.breakingbadapi.com/api/characters").then((resp) => {
+      this.store.characters = resp.data.results;
+      console.log(this.store.characters);
+      // Qui resetto loading a false perché i dati sono arrivati
+      this.store.loading = false;
+    });
+  }
+}
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="wrapper">
+    <AppHeader/>
+    <main>
+      <div class="container">
+        <AppLoader v-if="store.loading" />
+        <AppGrid v-else />
+      </div>
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<style lang="scss">
+@use "./style/general.scss" as *;
+
 </style>
