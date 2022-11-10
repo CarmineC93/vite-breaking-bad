@@ -12,5 +12,6 @@ export default {
 h2 {
     font-size: 4rem;
     margin: 2rem 0;
+    color: white;
 }
 </style>

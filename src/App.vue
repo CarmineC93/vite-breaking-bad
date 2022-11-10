@@ -27,9 +27,12 @@ export default {
 
     this.store.loading = true;
     axios.get("https://www.breakingbadapi.com/api/characters").then((resp) => {
-      this.store.characters = resp.data.results;
+      this.store.characters = resp.data;
+      //loggo il proxy
+      console.log(resp);
+      //loggo l'array con i 62 oggetti/characters
       console.log(this.store.characters);
-      // Qui resetto loading a false perché i dati sono arrivati
+      //resetto loading a false perché i dati sono arrivati
       this.store.loading = false;
     });
   }

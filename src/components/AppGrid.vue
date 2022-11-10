@@ -17,8 +17,8 @@ export default {
 
 <template>
     <div class="grid">
-        <div class="row row-cols-2 row-cols-md-4 g-3">
-            <div class="col" v-for="character in store.characters" :key="character.char_id">
+        <div class="row">
+            <div class="col-2" v-for="character in store.characters" :key="character.char_id">
                 <AppCard :character="character" />
             </div>
         </div>
@@ -29,8 +29,6 @@ export default {
 
 .grid{
     background-color: white;
-        // debug
-        height: 500px;
 }
 
 </style>
