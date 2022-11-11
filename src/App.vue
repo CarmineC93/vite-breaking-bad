@@ -33,33 +33,31 @@ export default {
   },
   methods: {
     getCharacters() {
-    // Prima di iniziare la chiamata, metto loading a true
+    // Prima che inizi la chiamata, metto loading a true
     this.store.loading = true;
     
-    let apiUrl = "https://www.breakingbadapi.com/api/characters";
-      // ?category=Better+Call+Saul
-    //creo oggetto dei parametri dell'API che andrò ad aggiungere se l'utente avrà dato un valore alla proprietà flag in store 
-    let urlParams = {}
-      if (this.store.searchStatus) {
-        urlParams.status = this.store.searchCategory;
-        console.log(resp.data)
+    //salvo in una variabile l'API
+    let apiUrl = "https://www.breakingbadapi.com/api/characters"; // ?category=Better+Call+Saul
 
+    //creo oggetto di parametriAPI che andrò ad aggiungere se l'utente avrà dato un valore alla proprietà flag in store.js 
+    let urlParams = {}
+      if (this.store.searchCategory) {
+        urlParams.category = this.store.searchCategory;
       }
 
       //con get facciamo chiamata dell'API + oggetto di parametriAPI il cui valore verrà assegnato sopra se l'utente ha dato un valore in store
       axios.get(apiUrl, {
         params: urlParams
-      })
-        //qui abbiamo la risposta e diciamo cosa farne
-        .then((resp) => {
+      }).then((resp) => {
+          //qui abbiamo la risposta e diciamo cosa farne
           this.store.characters = resp.data
         })
-        //qui gestiamo eventuali errori(come l'assenza di valori validi)
         .catch(err => {
+          //qui gestiamo eventuali errori(come l'assenza di valori validi)
           this.store.characters = [];
         })
-        //infine resetto valore di proprietà flag loading, perchè ormai i valori sono arrivati
         .finally(() => {
+          //infine resetto valore di proprietà flag loading, perchè ormai i valori sono arrivati
           this.store.loading = false;
         })
 
@@ -73,7 +71,6 @@ export default {
   <div class="wrapper">
     <AppHeader/>
     <AppFilter @search="getCharacters" />
-/>
     <main>
       <div class="container">
         <AppCounter />
