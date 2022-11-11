@@ -25,11 +25,12 @@ export default {
     .character-card{
         background-color:  rgb(26, 26, 33);
         
-        
         .pic{
             padding: 1rem;
             img{
                 max-height: 200px;
+                object-fit: cover;
+                object-position: top;
             }
         }
 
