@@ -28,6 +28,7 @@ export default {
         .pic{
             padding: 1rem;
             img{
+                height: 200px ;
                 max-height: 200px;
                 object-fit: cover;
                 object-position: top;
@@ -38,6 +39,7 @@ export default {
             padding-bottom:  1rem;
 
             h5{
+                font-size: .8rem;
                 color: white;
                 text-transform: uppercase;
             }

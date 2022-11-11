@@ -27,7 +27,7 @@ export default {
     }
   },
   created() {
-    //prima che l'utente possa filtrare i personaggi l pagina carica comunque tutti i personaggi
+    //prima che l'utente possa filtrare i personaggi la pagina carica comunque tutti i personaggi
     //solo se le condizioni in methods sono true la chiamata viene modificata
     this.getCharacters() 
   },
@@ -41,19 +41,23 @@ export default {
 
     //creo oggetto di parametriAPI che andrò ad aggiungere se l'utente avrà dato un valore alla proprietà flag in store.js 
     let urlParams = {}
+    console.log(this.store.searchCategory)
       if (this.store.searchCategory) {
+        console.log(urlParams.category);
         urlParams.category = this.store.searchCategory;
       }
-
+      console.log(urlParams)
       //con get facciamo chiamata dell'API + oggetto di parametriAPI il cui valore verrà assegnato sopra se l'utente ha dato un valore in store
       axios.get(apiUrl, {
         params: urlParams
       }).then((resp) => {
           //qui abbiamo la risposta e diciamo cosa farne
           this.store.characters = resp.data
+          console.log(resp.data)
         })
         .catch(err => {
           //qui gestiamo eventuali errori(come l'assenza di valori validi)
+          //in questo caso se nessun valore corrisponde alla ricerca, anzichè apparire un errore 404, svuotiamo semplicemente l'array
           this.store.characters = [];
         })
         .finally(() => {

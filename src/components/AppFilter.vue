@@ -13,7 +13,7 @@ export default {
 
 <template>
     <div class="filter d-flex justify-content-center">
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" aria-label="Default select example" v-model="store.searchCategory">
             <option selected value="">Select Series</option>
             <!-- creo un'opzione per ogni elemento nell'array categoryOptions -->
             <option v-for="(option, index) in categoryOptions" :value="option" :key="index">{{ option }}</option>
